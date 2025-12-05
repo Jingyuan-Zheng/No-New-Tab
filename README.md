@@ -1,18 +1,17 @@
 # No New Tab for Chinese Top Websites
-#  禁止新标签页打开链接
-The README of this project has documentation in both English and Chinese.
-
-中文说明可点击下方：
-- [简体中文](README.cn.md)
-
-
-# No New Tab for Chinese Top Websites
-🎯 Completely disable all new tab opening behavior on Bilibili, Weibo, Zhihu and RedNote! Say no to redirects and enjoy a seamless browsing experience like a native app!
+🎯 Completely disable all new tab opening behavior on Bilibili, Weibo，Zhihu and RedNote! Say no to redirects and enjoy a seamless browsing experience like a native app!
 
 ## 🚀 Core Features
-- **Force links to open in the current tab:** All links on Bilibili, Weibo, and Zhihu that would normally open in a new tab (target="_blank") will now open in the current tab, preventing unnecessary new tabs.
-- **Fix for Bilibili Match Page Home Button:** Ensures the home button on Bilibili's match pages always redirects in the current tab instead of opening a new one.
-- **SPA Routing Optimization:** Optimized for Single Page Applications (SPA), ensuring dynamic content links are handled correctly without breaking functionality.
+* Prevents new tab opening on Bilibili, Weibo, Zhihu, and RedNote (Xiaohongshu)
+* Covers special links in comment sections, such as:
+  * User avatars
+  * Usernames / IDs
+  * Product cards
+  * Hashtags
+  * Search links
+* Even if the website tries to force a new tab, the script will intercept it and open the page **in the same tab**
+* Keeps your browser clean and organized by minimizing unnecessary tabs
+* Specially optimized for Bilibili search — pressing Enter or clicking the search button will stay in the current tab
 
 ## 📌 Installation
 1. Install a script manager 🔧
@@ -25,10 +24,17 @@ The README of this project has documentation in both English and Chinese.
 3. Visit any Bilibili, Weibo, or Zhihu page to test the effect ✅  
    Examples: [Bilibili Main Site](https://www.bilibili.com) | [Bilibili Live](https://live.bilibili.com) | [Zhihu](https://www.zhihu.com)
 
-# Existed Bug
-- It doesn't work in comments area of Bilibili
-
 # 📖 Changelog
+
+### v5.0 (2025-12-05)
+
+- Enhanced compatibility with complex page structures and dynamically injected content
+- Completely fixed the issue of links in Bilibili comment sections being forced to open in new tabs
+- Improved monitoring and handling of asynchronously loaded elements to ensure long-term stability
+
+**Previously Known Issue:**
+
+* ~~Links in Bilibili comment sections do not work properly~~ ✅ Fixed
 
 ### v.4.1 (2025-04-28)
 - Added support for RedNote
@@ -46,7 +52,7 @@ The README of this project has documentation in both English and Chinese.
 - Partially rewritten to optimize behavior on certain pages
 - Added support for non-Safari browsers
 
-### v1.0.0 (2025-02-15)
+### v1.0 (2025-02-15)
 - Initial release: Basic link interception, Safari-only support
 
 ## 🤝 Contributing
