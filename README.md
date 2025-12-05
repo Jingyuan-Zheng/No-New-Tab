@@ -1,4 +1,10 @@
 # No New Tab for Chinese Top Websites
+# 禁止某些国内网站新标签页打开链接
+The README of this project has documentation in both English and Chinese.
+
+中文说明可点击下方：
+- [简体中文](README.cn.md)
+
 🎯 Completely disable all new tab opening behavior on Bilibili, Weibo，Zhihu and RedNote! Say no to redirects and enjoy a seamless browsing experience like a native app!
 
 ## 🚀 Core Features
