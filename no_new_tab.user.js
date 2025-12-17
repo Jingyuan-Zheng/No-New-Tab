@@ -2,7 +2,7 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Chinese Top Websites
 // @namespace    http://tampermonkey.net/
-// @version      5.0
+// @version      5.1
 // @description  让哔哩哔哩、微博、知乎、小红书所有链接在当前标签页打开
 // @description:en Force all Bilibili, Weibo, Zhihu, and RedNote links to open in the current tab
 // @author       ChingyuanCheng
@@ -212,10 +212,16 @@
                         // 劫持 B 站搜索（广泛匹配）
                         const keyword = tg.value || tg.textContent || '';
                         if (keyword.trim()) {
-                            e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-                            const searchUrl = `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
-                            location.href = searchUrl;
-                            return;
+                            // **修复点**：只有在 B 站域名下才把回车劫持到 B 站搜索
+                            if (IS_BILIBILI) {
+                                e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+                                const searchUrl = `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
+                                location.href = searchUrl;
+                                return;
+                            } else {
+                                // 在非 B 站域名上不要干预，保留站点自身的搜索行为
+                                return;
+                            }
                         }
                     }
                 }
