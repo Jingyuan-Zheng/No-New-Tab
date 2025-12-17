@@ -32,6 +32,9 @@ The README of this project has documentation in both English and Chinese.
 
 # 📖 Changelog
 
+### v5.1 (2025-12-17)
+- Fix the bug of searching
+
 ### v5.0 (2025-12-05)
 
 - Enhanced compatibility with complex page structures and dynamically injected content
@@ -42,7 +45,7 @@ The README of this project has documentation in both English and Chinese.
 
 * ~~Links in Bilibili comment sections do not work properly~~ ✅ Fixed
 
-### v.4.1 (2025-04-28)
+### v4.1 (2025-04-28)
 - Added support for RedNote
 
 ### v4.0 (2025-02-16)
