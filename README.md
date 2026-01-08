@@ -1,15 +1,15 @@
-# No New Tab for Chinese Top Websites
-# 禁止某些国内网站新标签页打开链接
+# No New Tab for Some Websites
+# 禁止某些网站新标签页打开链接
 The README of this project has documentation in both English and Chinese.
 
 中文说明可点击下方：
 - [简体中文](README.cn.md)
 
-🎯 Completely disable all new tab opening behavior on Bilibili, Weibo，Zhihu and RedNote! Say no to redirects and enjoy a seamless browsing experience like a native app!
+🎯 Completely disable all new tab opening behavior on Bilibili, Weibo，Zhihu, RedNote, Appstorrent, Skymods! Say no to redirects and enjoy a seamless browsing experience like a native app!
 
 ## 🚀 Core Features
-* Prevents new tab opening on Bilibili, Weibo, Zhihu, and RedNote (Xiaohongshu)
-* Covers special links in comment sections, such as:
+* Prevents new tab opening on Bilibili, Weibo, Zhihu, RedNote (Xiaohongshu), Appstorrent, Skymods
+* Covers special links in comment sections in Bilibili, such as:
   * User avatars
   * Usernames / IDs
   * Product cards
@@ -31,6 +31,10 @@ The README of this project has documentation in both English and Chinese.
    Examples: [Bilibili Main Site](https://www.bilibili.com) | [Bilibili Live](https://live.bilibili.com) | [Zhihu](https://www.zhihu.com)
 
 # 📖 Changelog
+
+### v5.2 (2026-01-08)
+- Fix the bug of searching
+- Added support for Skymods, Appstorrent
 
 ### v5.1 (2025-12-17)
 - Fix the bug of searching
