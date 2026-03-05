@@ -32,6 +32,9 @@ The README of this project has documentation in both English and Chinese.
 
 # 📖 Changelog
 
+### v5.3 (2026-03-05)
+- Bump version to 5.3 and improve button matching
+
 ### v5.2 (2026-01-08)
 - Fix the bug of searching
 - Added support for Skymods, Appstorrent
