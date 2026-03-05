@@ -2,7 +2,7 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Some Websites
 // @namespace    http://tampermonkey.net/
-// @version      5.2
+// @version      5.3
 // @description  让哔哩哔哩、微博、知乎、小红书、Appstorrent、Skymods等网站所有链接在当前标签页打开
 // @description:en Force all Bilibili, Weibo, Zhihu, and RedNote links to open in the current tab
 // @author       ChingyuanCheng
@@ -367,15 +367,13 @@
                 if (target.tagName === 'BUTTON' || (target.className && typeof target.className === 'string')) {
                     const cls = target.className || '';
                     // 【重要修复】：移除过于宽泛的 "search" 匹配，只匹配明确的按钮类名，防止误匹配容器
-                    if (cls.includes('search-btn') || cls.includes('nav-search-submit') || cls.includes('nav-search-btn') || cls.includes('search-submit')) {
+                    if (cls.includes('search-btn') || cls.includes('nav-search-submit') || cls.includes('nav-search-btn') || cls.includes('search-submit') || cls.includes('submit') || target.getAttribute('title') === '执行') {
                         const form = target.closest('form');
                         const input = form ? form.querySelector('input') : document.querySelector('input[placeholder*="搜索"], input[aria-label*="搜索"]');
                         const keyword = input && input.value ? input.value.trim() : '';
-                        if (keyword) {
-                            e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-                            location.href = `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
-                            return;
-                        }
+                        e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+                        location.href = `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
+                        return;    
                     }
                 }
                 target = target.parentElement;
