@@ -32,6 +32,9 @@ The README of this project has documentation in both English and Chinese.
 
 # 📖 Changelog
 
+### v5.4 (2026-03-09)
+- Added support for IThome
+
 ### v5.3 (2026-03-05)
 - Bump version to 5.3 and improve button matching
 
