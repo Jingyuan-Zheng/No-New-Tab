@@ -2,7 +2,7 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Some Websites
 // @namespace    http://tampermonkey.net/
-// @version      5.3
+// @version      5.4
 // @description  让哔哩哔哩、微博、知乎、小红书、Appstorrent、Skymods等网站所有链接在当前标签页打开
 // @description:en Force all Bilibili, Weibo, Zhihu, and RedNote links to open in the current tab
 // @author       ChingyuanCheng
@@ -14,6 +14,7 @@
 // @match        *://*.smods.ru/*
 // @match        *://*.modsbase.com/*
 // @match        *://*.appstorrent.ru/*
+// @match        *://*.ithome.com/*
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
@@ -37,6 +38,8 @@
                 u.hostname === 'zhihu.com' ||
                 u.hostname.endsWith('.xiaohongshu.com') ||
                 u.hostname === 'xiaohongshu.com' ||
+                u.hostname.endsWith('.ithome.com') ||
+                u.hostname === 'ithome.com' ||
                 u.hostname.endsWith('.modsbase.com') ||
                 u.hostname === 'modsbase.com' ||
                 u.hostname.endsWith('.appstorrent.ru') ||
