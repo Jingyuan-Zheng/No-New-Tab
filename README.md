@@ -32,7 +32,12 @@ The README of this project has documentation in both English and Chinese.
 
 # 📖 Changelog
 
-### v5.4 (2026-03-09)
+### v5.5 (2026-04-26)
+- Fixed an issue where clicking the favorites button on Bilibili would incorrectly trigger a search page redirect
+- Fixed an issue where clicking the search button with an empty search box would redirect to the search page
+- Fixed an issue where pressing Enter in the Bilibili history page search bar would simultaneously trigger both the history search and the global search
+
+### v5.4 (2025-03-09)
 - Added support for IThome
 
 ### v5.3 (2026-03-05)
@@ -46,14 +51,9 @@ The README of this project has documentation in both English and Chinese.
 - Fix the bug of searching
 
 ### v5.0 (2025-12-05)
-
 - Enhanced compatibility with complex page structures and dynamically injected content
 - Completely fixed the issue of links in Bilibili comment sections being forced to open in new tabs
 - Improved monitoring and handling of asynchronously loaded elements to ensure long-term stability
-
-**Previously Known Issue:**
-
-* ~~Links in Bilibili comment sections do not work properly~~ ✅ Fixed
 
 ### v4.1 (2025-04-28)
 - Added support for RedNote
