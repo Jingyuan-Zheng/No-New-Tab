@@ -13,6 +13,11 @@
 * 减少浏览器标签数量，让操作更加专注、干净、高效
 * 特别优化了 B 站搜索行为：按下回车或点击搜索按钮时不会跳出新标签页
 
+## 🎬 效果演示
+
+[![B 站同标签页打开演示](https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/assets/bilibili-demo.png)](https://github.com/Jingyuan-Zheng/No-New-Tab/blob/main/assets/bilibili-demo.mp4)
+
+点击上方图片可观看 MP4 演示视频。
 
 ## 📌 安装方法
 1. 安装脚本管理器 🔧

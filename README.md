@@ -19,6 +19,12 @@ The README of this project has documentation in both English and Chinese.
 * Keeps your browser clean and organized by minimizing unnecessary tabs
 * Specially optimized for Bilibili search — pressing Enter or clicking the search button will stay in the current tab
 
+## 🎬 Demo
+
+[![No New Tab demo on Bilibili](https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/assets/bilibili-demo.png)](https://github.com/Jingyuan-Zheng/No-New-Tab/blob/main/assets/bilibili-demo.mp4)
+
+Click the image above to watch the MP4 demo.
+
 ## 📌 Installation
 1. Install a script manager 🔧
    - [Tampermonkey](https://www.tampermonkey.net/) (Recommended for Chrome/Edge/Safari)
