@@ -21,9 +21,11 @@ The README of this project has documentation in both English and Chinese.
 
 ## 🎬 Demo
 
-[![No New Tab demo on Bilibili](https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/assets/bilibili-demo.png)](https://github.com/Jingyuan-Zheng/No-New-Tab/blob/main/assets/bilibili-demo.mp4)
+https://github.com/user-attachments/assets/1b11f4dd-e037-409a-9360-96c3b4c63fdd
 
-Click the image above to watch the MP4 demo.
+![No New Tab demo on Bilibili](https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/assets/bilibili-demo.png)
+
+Note: The Bilibili visual style shown in the demo is not provided by this script. It comes from [BewlyBewly](https://jingyuan-zheng.github.io/zh-cn/p/bewlybewly-safari-revival/) and [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved). The Safari version of BewlyBewly is available from [Jingyuan-Zheng/BewlyBewly_Safari](https://github.com/Jingyuan-Zheng/BewlyBewly_Safari).
 
 ## 📌 Installation
 1. Install a script manager 🔧

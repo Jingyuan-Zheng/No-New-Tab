@@ -15,9 +15,11 @@
 
 ## 🎬 效果演示
 
-[![B 站同标签页打开演示](https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/assets/bilibili-demo.png)](https://github.com/Jingyuan-Zheng/No-New-Tab/blob/main/assets/bilibili-demo.mp4)
+https://github.com/user-attachments/assets/1b11f4dd-e037-409a-9360-96c3b4c63fdd
 
-点击上方图片可观看 MP4 演示视频。
+![B 站同标签页打开演示](https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/assets/bilibili-demo.png)
+
+说明：视频中哔哩哔哩网站的视觉效果不来自本插件，而是由 [BewlyBewly](https://jingyuan-zheng.github.io/zh-cn/p/bewlybewly-safari-revival/) 和 [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) 提供。BewlyBewly 的 Safari 版本可在 [Jingyuan-Zheng/BewlyBewly_Safari](https://github.com/Jingyuan-Zheng/BewlyBewly_Safari) 下载。
 
 ## 📌 安装方法
 1. 安装脚本管理器 🔧
