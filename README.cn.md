@@ -20,12 +20,17 @@
    - [Greasemonkey](https://www.greasespot.net/) (Firefox推荐)
 
 2. 一键安装脚本 📦  
-   [![安装链接](https://img.shields.io/badge/安装脚本-GreasyFork-green.svg)](https://greasyfork.org/zh-CN/scripts/527007)
+   [![从 GreasyFork 安装](https://img.shields.io/badge/安装-GreasyFork-green.svg)](https://greasyfork.org/zh-CN/scripts/527007)
+   [![从 GitHub 安装](https://img.shields.io/badge/安装-GitHub-blue.svg)](https://github.com/Jingyuan-Zheng/No-New-Tab/raw/main/no_new_tab.user.js)
 
 3. 访问任意B站、微博、知乎页面测试效果 ✅  
    例如：[B站主站](https://www.bilibili.com) | [B站直播](https://live.bilibili.com) | [知乎](https://www.zhihu.com)
 
 ## 📖 更新日志
+
+### v5.5.1 (2026-05-27)
+- 添加 GitHub 直接安装与自动更新元数据
+- 更新 README 安装链接与仓库地址
 
 ### v5.5 (2026-04-26)
 - 修复了在哔哩哔哩点击收藏按钮时会错误触发搜索页面跳转的问题
@@ -71,9 +76,9 @@
 
 ## 🤝 参与贡献
 欢迎通过以下方式参与改进：
-1. 提交BUG报告：[问题追踪](https://github.com/ChingyuanCheng/Bilibili.Weibo.Zhihu_No-New-Tab/issues)
-2. 发起功能请求：[功能建议](https://github.com/ChingyuanCheng/Bilibili.Weibo.Zhihu_No-New-Tab/issues)
-3. 直接贡献代码：🚀 [Fork仓库](https://github.com/ChingyuanCheng/Bilibili.Weibo.Zhihu_No-New-Tab/fork)
+1. 提交BUG报告：[问题追踪](https://github.com/Jingyuan-Zheng/No-New-Tab/issues)
+2. 发起功能请求：[功能建议](https://github.com/Jingyuan-Zheng/No-New-Tab/issues)
+3. 直接贡献代码：🚀 [Fork仓库](https://github.com/Jingyuan-Zheng/No-New-Tab/fork)
 
 ## 📜 许可证
-MIT License © 2025 [ChingyuanCheng](https://github.com/ChingyuanCheng)
+MIT License © 2025 [ChingyuanCheng](https://github.com/Jingyuan-Zheng)

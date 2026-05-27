@@ -25,12 +25,17 @@ The README of this project has documentation in both English and Chinese.
    - [Greasemonkey](https://www.greasespot.net/) (Recommended for Firefox)
 
 2. Install the script with one click 📦  
-   [![Install Link](https://img.shields.io/badge/Install_Script-GreasyFork-green.svg)](https://greasyfork.org/zh-CN/scripts/527007)
+   [![Install from GreasyFork](https://img.shields.io/badge/Install-GreasyFork-green.svg)](https://greasyfork.org/zh-CN/scripts/527007)
+   [![Install from GitHub](https://img.shields.io/badge/Install-GitHub-blue.svg)](https://github.com/Jingyuan-Zheng/No-New-Tab/raw/main/no_new_tab.user.js)
 
 3. Visit any Bilibili, Weibo, or Zhihu page to test the effect ✅  
    Examples: [Bilibili Main Site](https://www.bilibili.com) | [Bilibili Live](https://live.bilibili.com) | [Zhihu](https://www.zhihu.com)
 
 # 📖 Changelog
+
+### v5.5.1 (2026-05-27)
+- Added GitHub direct install and update metadata
+- Updated README installation links and repository references
 
 ### v5.5 (2026-04-26)
 - Fixed an issue where clicking the favorites button on Bilibili would incorrectly trigger a search page redirect
@@ -76,9 +81,9 @@ The README of this project has documentation in both English and Chinese.
 
 ## 🤝 Contributing
 Welcome to contribute in the following ways:
-1. Submit bug reports: [Issue Tracker](https://github.com/ChingyuanCheng/Bilibili.Weibo.Zhihu_No-New-Tab/issues)
-2. Request new features: [Feature Suggestions](https://github.com/ChingyuanCheng/Bilibili.Weibo.Zhihu_No-New-Tab/issues)
-3. Contribute code directly: 🚀 [Fork Repository](https://github.com/ChingyuanCheng/Bilibili.Weibo.Zhihu_No-New-Tab/fork)
+1. Submit bug reports: [Issue Tracker](https://github.com/Jingyuan-Zheng/No-New-Tab/issues)
+2. Request new features: [Feature Suggestions](https://github.com/Jingyuan-Zheng/No-New-Tab/issues)
+3. Contribute code directly: 🚀 [Fork Repository](https://github.com/Jingyuan-Zheng/No-New-Tab/fork)
 
 ## 📜 License
-MIT License © 2025 [ChingyuanCheng](https://github.com/ChingyuanCheng)
+MIT License © 2025 [ChingyuanCheng](https://github.com/Jingyuan-Zheng)

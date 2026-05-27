@@ -2,11 +2,15 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Some Websites
 // @namespace    http://tampermonkey.net/
-// @version      5.5
+// @version      5.5.1
 // @description  让哔哩哔哩、微博、知乎、小红书、Appstorrent、Skymods等网站所有链接在当前标签页打开
 // @description:en Force all Bilibili, Weibo, Zhihu, and RedNote links to open in the current tab
 // @author       ChingyuanCheng
 // @license      MIT
+// @homepageURL  https://github.com/Jingyuan-Zheng/No-New-Tab
+// @supportURL   https://github.com/Jingyuan-Zheng/No-New-Tab/issues
+// @updateURL    https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/no_new_tab.user.js
+// @downloadURL  https://raw.githubusercontent.com/Jingyuan-Zheng/No-New-Tab/main/no_new_tab.user.js
 // @match        *://*.bilibili.com/*
 // @match        *://*.weibo.com/*
 // @match        *://*.zhihu.com/*
