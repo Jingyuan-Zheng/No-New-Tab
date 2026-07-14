@@ -8,7 +8,7 @@ The README of this project has documentation in both English and Chinese.
 🎯 Completely disable all new tab opening behavior on Bilibili, Weibo，Zhihu, RedNote, Appstorrent, Skymods! Say no to redirects and enjoy a seamless browsing experience like a native app!
 
 ## 🚀 Core Features
-* Prevents new tab opening on Bilibili, Weibo, Zhihu, RedNote (Xiaohongshu), Appstorrent, Skymods
+* Prevents enabled websites such as Bilibili, Weibo, Zhihu, RedNote (Xiaohongshu), and the Chinese Government website from forcing new tabs
 * Covers special links in comment sections in Bilibili, such as:
   * User avatars
   * Usernames / IDs
@@ -18,6 +18,11 @@ The README of this project has documentation in both English and Chinese.
 * Even if the website tries to force a new tab, the script will intercept it and open the page **in the same tab**
 * Keeps your browser clean and organized by minimizing unnecessary tabs
 * Specially optimized for Bilibili search — pressing Enter or clicking the search button will stay in the current tab
+* Lets users add any HTTP/HTTPS website from the userscript menu, with optional subdomain matching
+* Stores custom websites separately in the userscript manager so normal script updates do not overwrite them
+* Supports managing, removing, importing, and exporting custom website settings
+* Handles both internal and external HTTP/HTTPS links on enabled websites without requiring the destination website to be added
+* Preserves deliberate middle-click and Command/Ctrl, Shift, or Alt click behavior for opening a new tab or window
 
 ## 🎬 Demo
 
@@ -39,7 +44,31 @@ Note: The Bilibili visual style shown in the demo is not provided by this script
 3. Visit any Bilibili, Weibo, or Zhihu page to test the effect ✅  
    Examples: [Bilibili Main Site](https://www.bilibili.com) | [Bilibili Live](https://live.bilibili.com) | [Zhihu](https://www.zhihu.com)
 
+## ⚙️ Adding Custom Websites
+
+1. Open the website where you want to enable No New Tab.
+2. Click the Tampermonkey or Greasemonkey icon in the browser toolbar.
+3. Choose **“➕ Enable on this website”**. The page reloads and the rule takes effect.
+4. Choose **“⚙️ Manage website list”** to enter another domain, remove rules, or import/export your configuration.
+
+Menus, the management panel, confirmation dialogs, and status messages automatically use Chinese or English based on the browser's preferred language.
+
+The website list determines **where the userscript is active**. It never collects or automatically adds destination websites. For example, after enabling a news website, external links clicked from that website stay in the current tab. Once the external website loads, the userscript stops acting unless that website is also in the list.
+
+The userscript must match all HTTP/HTTPS pages so it can run on websites that users add later. On websites that are not enabled, it only registers the settings menu and exits immediately; it does not install click interception, DOM observers, or page prototype patches. Custom settings survive normal automatic updates. Export the configuration before uninstalling the script, changing userscript managers, or clearing extension data.
+
 # 📖 Changelog
+
+### v6.0.0 (2026-07-14)
+- Added user-defined websites and optional subdomain rules
+- Stored user rules separately through the userscript manager so script updates do not overwrite them
+- Added a website management panel, quick enable command, and configuration import/export
+- Added automatic Chinese or English UI based on the browser's preferred language
+- Switched to source-site activation, so external links on an enabled website no longer require the destination domain to be listed
+- Preserved deliberate middle-click and Command/Ctrl, Shift, or Alt click behavior
+- Added `gov.cn` and its subdomains to the built-in rules
+- Switched to a lightweight all-site bootstrap that loads full interception only on enabled websites
+- Adapted page-level interception for the sandbox introduced by persistent-storage permissions
 
 ### v5.5.1 (2026-05-27)
 - Added GitHub direct install and update metadata
@@ -94,4 +123,4 @@ Welcome to contribute in the following ways:
 3. Contribute code directly: 🚀 [Fork Repository](https://github.com/Jingyuan-Zheng/No-New-Tab/fork)
 
 ## 📜 License
-MIT License © 2025 [ChingyuanCheng](https://github.com/Jingyuan-Zheng)
+MIT License © 2025 [Jingyuan Zheng](https://github.com/Jingyuan-Zheng)
