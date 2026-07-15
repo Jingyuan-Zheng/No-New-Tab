@@ -59,6 +59,9 @@ The userscript must match all HTTP/HTTPS pages so it can run on websites that us
 
 # 📖 Changelog
 
+### v6.0.1 (2026-07-15)
+- Rewrote the Chinese and English userscript descriptions with direct search terms and examples of supported websites
+
 ### v6.0.0 (2026-07-14)
 - Added user-defined websites and optional subdomain rules
 - Stored user rules separately through the userscript manager so script updates do not overwrite them

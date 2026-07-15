@@ -41,7 +41,9 @@ vm.runInNewContext(source.replace(bootstrapCall, testExport), context, { filenam
 const api = context.__noNewTabTestApi;
 
 test('Chinese and English translation tables contain the same keys', () => {
-    assert.match(source, /\/\/ @version\s+6\.0\.0\s*$/m);
+    assert.match(source, /\/\/ @version\s+6\.0\.1\s*$/m);
+    assert.match(source, /@description\s+禁止 B站、知乎、微博、小红书等网站强制新标签页打开链接/);
+    assert.match(source, /@description:en\s+Block Bilibili, Zhihu, Weibo, RedNote/);
     assert.match(source, /\/\/ @author\s+Jingyuan Zheng/);
     assert.deepEqual(
         Object.keys(api.TRANSLATIONS.zh).sort(),

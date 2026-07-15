@@ -2,9 +2,9 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Some Websites
 // @namespace    http://tampermonkey.net/
-// @version      6.0.0
-// @description  让内置及用户自定义网站的链接在当前标签页打开，自定义配置在脚本更新后仍会保留
-// @description:en Force links on built-in and user-defined websites to open in the current tab while preserving custom settings across updates
+// @version      6.0.1
+// @description  禁止 B站、知乎、微博、小红书等网站强制新标签页打开链接，统一在当前标签页打开；支持自定义网站，脚本更新不丢配置
+// @description:en Block Bilibili, Zhihu, Weibo, RedNote, and other sites from forcing links to open in new tabs; open links in the current tab, add custom sites, and preserve settings across updates
 // @author       Jingyuan Zheng
 // @license      MIT
 // @homepageURL  https://github.com/Jingyuan-Zheng/No-New-Tab
