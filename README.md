@@ -24,6 +24,10 @@ The README of this project has documentation in both English and Chinese.
 * Handles both internal and external HTTP/HTTPS links on enabled websites without requiring the destination website to be added
 * Preserves deliberate middle-click and Command/Ctrl, Shift, or Alt click behavior for opening a new tab or window
 
+## ⚠️ Known Issue
+
+On Bilibili video pages, some profile links—including UP creator avatars/names and comment-user avatars—may still open in a new tab. The attempted fix was reverted while the issue is investigated.
+
 ## 🎬 Demo
 
 https://github.com/user-attachments/assets/1b11f4dd-e037-409a-9360-96c3b4c63fdd
