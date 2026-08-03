@@ -2,7 +2,7 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Some Websites
 // @namespace    http://tampermonkey.net/
-// @version      6.0.1
+// @version      6.1.0
 // @description  禁止 B站、知乎、微博、小红书等网站强制新标签页打开链接，统一在当前标签页打开；支持自定义网站，脚本更新不丢配置
 // @description:en Block Bilibili, Zhihu, Weibo, RedNote, and other sites from forcing links to open in new tabs; open links in the current tab, add custom sites, and preserve settings across updates
 // @author       Jingyuan Zheng
@@ -603,9 +603,17 @@
         }
     }
 
+    function isNewTabTarget(targetValue) {
+        if (!targetValue) return false;
+        const normalized = String(targetValue).trim().toLowerCase();
+        return normalized !== '' && normalized !== '_self' && normalized !== '_top' && normalized !== '_parent';
+    }
+
     function hasBlankTarget(element) {
-        if (!element || !element.getAttribute) return false;
-        return String(element.getAttribute('target') || '').toLowerCase() === '_blank';
+        if (!element) return false;
+        const attrTarget = typeof element.getAttribute === 'function' ? element.getAttribute('target') : null;
+        const propTarget = element.target;
+        return isNewTabTarget(attrTarget) || isNewTabTarget(propTarget);
     }
 
     function rememberUserRequestedNewContext(event) {
@@ -675,6 +683,66 @@
         return fn;
     }
 
+    function createNavigationProxyWindow() {
+        const dummyWindow = {
+            closed: false,
+            focus() {},
+            blur() {},
+            close() { this.closed = true; },
+            postMessage() {},
+            location: {
+                replace(url) { navigateInPlace(url); },
+                assign(url) { navigateInPlace(url); }
+            }
+        };
+
+        try {
+            Object.defineProperty(dummyWindow.location, 'href', {
+                get() { return PAGE_WINDOW.location.href; },
+                set(url) { navigateInPlace(url); },
+                configurable: true
+            });
+        } catch {
+            // Fallback if property definition fails.
+        }
+
+        if (typeof Proxy !== 'function') return dummyWindow;
+
+        return new Proxy(dummyWindow, {
+            get(target, prop) {
+                if (prop === 'location') {
+                    return target.location;
+                }
+                if (prop in target) {
+                    const val = target[prop];
+                    return typeof val === 'function' ? val.bind(target) : val;
+                }
+                try {
+                    const pageVal = PAGE_WINDOW[prop];
+                    return typeof pageVal === 'function' ? pageVal.bind(PAGE_WINDOW) : pageVal;
+                } catch {
+                    return undefined;
+                }
+            },
+            set(target, prop, value) {
+                if (prop === 'location') {
+                    navigateInPlace(value);
+                    return true;
+                }
+                if (prop in target) {
+                    target[prop] = value;
+                    return true;
+                }
+                try {
+                    PAGE_WINDOW[prop] = value;
+                } catch {
+                    // Ignore assignment errors.
+                }
+                return true;
+            }
+        });
+    }
+
     function patchWindowOpen() {
         try {
             const originalOpen = PAGE_WINDOW.open;
@@ -684,10 +752,15 @@
                     const rawUrl = args[0];
                     const candidate = typeof rawUrl === 'string' ? rawUrl : rawUrl && rawUrl.href;
                     const target = String(args[1] || '_blank').toLowerCase();
-                    const alreadyUsesCurrentContext = target === '_self' || target === '_top' || target === '_parent';
-                    if (candidate && isHttpUrl(candidate) && !alreadyUsesCurrentContext && !userRequestedNewContext) {
-                        navigateInPlace(candidate);
-                        return null;
+                    const alreadyUsesCurrentContext = !isNewTabTarget(target);
+                    if (!alreadyUsesCurrentContext && !userRequestedNewContext) {
+                        if (candidate && isHttpUrl(candidate)) {
+                            navigateInPlace(candidate);
+                            return createNavigationProxyWindow();
+                        }
+                        if (!candidate || candidate === 'about:blank' || candidate === '') {
+                            return createNavigationProxyWindow();
+                        }
                     }
                 } catch {
                     // Fall through to the website's original implementation.
@@ -707,7 +780,7 @@
             if (typeof originalSetAttribute !== 'function') return;
             const replacement = function (name, value) {
                 try {
-                    if (String(name).toLowerCase() === 'target' && String(value).toLowerCase() === '_blank' && this.tagName === 'A') {
+                    if (String(name).toLowerCase() === 'target' && isNewTabTarget(value) && this.tagName === 'A' && !userRequestedNewContext) {
                         const href = this.href || this.getAttribute('href') || this.getAttribute('data-href');
                         if (href && isHttpUrl(href)) {
                             return Reflect.apply(originalSetAttribute, this, [name, '_self']);
@@ -721,6 +794,44 @@
             prototype.setAttribute = exportForPage(replacement);
         } catch (error) {
             console.warn('[No New Tab] Failed to patch setAttribute:', error);
+        }
+    }
+
+    function patchAnchorTargetProperty() {
+        try {
+            const prototype = PAGE_WINDOW.HTMLAnchorElement && PAGE_WINDOW.HTMLAnchorElement.prototype;
+            if (!prototype) return;
+            const descriptor = Object.getOwnPropertyDescriptor(prototype, 'target');
+            if (!descriptor || typeof descriptor.set !== 'function') return;
+
+            const originalSet = descriptor.set;
+            const originalGet = descriptor.get;
+
+            const getter = exportForPage(function () {
+                return Reflect.apply(originalGet, this, []);
+            });
+            const setter = exportForPage(function (value) {
+                try {
+                    if (isNewTabTarget(value) && !userRequestedNewContext) {
+                        const href = this.href || this.getAttribute('href') || this.getAttribute('data-href');
+                        if (href && isHttpUrl(href)) {
+                            return Reflect.apply(originalSet, this, ['_self']);
+                        }
+                    }
+                } catch {
+                    // Fall through to the website's original implementation.
+                }
+                return Reflect.apply(originalSet, this, [value]);
+            });
+
+            Object.defineProperty(prototype, 'target', {
+                configurable: true,
+                enumerable: descriptor.enumerable,
+                get: getter,
+                set: setter
+            });
+        } catch (error) {
+            console.warn('[No New Tab] Failed to patch anchor target property:', error);
         }
     }
 
@@ -916,6 +1027,7 @@
         interceptorStarted = true;
         patchWindowOpen();
         patchSetAttribute();
+        patchAnchorTargetProperty();
         patchAttachShadow();
         observeRoot(document);
         attachBilibiliSearchButtonInterceptor();
