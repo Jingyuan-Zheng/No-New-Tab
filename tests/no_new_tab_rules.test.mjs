@@ -41,7 +41,7 @@ vm.runInNewContext(source.replace(bootstrapCall, testExport), context, { filenam
 const api = context.__noNewTabTestApi;
 
 test('Chinese and English translation tables contain the same keys', () => {
-    assert.match(source, /\/\/ @version\s+6\.0\.1\s*$/m);
+    assert.match(source, /\/\/ @version\s+7\.0\.0\s*$/m);
     assert.match(source, /@description\s+禁止 B站、知乎、微博、小红书等网站强制新标签页打开链接/);
     assert.match(source, /@description:en\s+Block Bilibili, Zhihu, Weibo, RedNote/);
     assert.match(source, /\/\/ @author\s+Jingyuan Zheng/);
@@ -51,6 +51,13 @@ test('Chinese and English translation tables contain the same keys', () => {
     );
     assert.equal(api.LANGUAGE, 'zh');
     assert.equal(api.text('panelTitle'), 'No New Tab 网站管理');
+});
+
+test('page-realm click interception keeps explicit new-tab gestures intact', () => {
+    assert.match(source, /function injectPageRealmClickInterceptor\(\)/);
+    assert.match(source, /event\.button === 1 \|\| event\.metaKey \|\| event\.ctrlKey \|\| event\.shiftKey \|\| event\.altKey/);
+    assert.match(source, /event\.stopImmediatePropagation\(\);/);
+    assert.match(source, /location\.href = anchor\.href;/);
 });
 
 test('normalizes domains, URLs, wildcards, and IDNs', () => {

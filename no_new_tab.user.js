@@ -2,7 +2,7 @@
 // @name         禁止新标签页打开链接
 // @name:en      No New Tab for Some Websites
 // @namespace    http://tampermonkey.net/
-// @version      6.0.1
+// @version      7.0.0
 // @description  禁止 B站、知乎、微博、小红书等网站强制新标签页打开链接，统一在当前标签页打开；支持自定义网站，脚本更新不丢配置
 // @description:en Block Bilibili, Zhihu, Weibo, RedNote, and other sites from forcing links to open in new tabs; open links in the current tab, add custom sites, and preserve settings across updates
 // @author       Jingyuan Zheng
@@ -911,6 +911,56 @@
         }, true);
     }
 
+    function injectPageRealmClickInterceptor() {
+        try {
+            const mountPoint = document.head || document.documentElement;
+            if (!mountPoint || !document.createElement) {
+                document.addEventListener('DOMContentLoaded', injectPageRealmClickInterceptor, { once: true });
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.dataset.noNewTabPageClickInterceptor = 'true';
+            script.textContent = `(${function () {
+                if (window.__noNewTabPageClickInterceptor) return;
+                window.__noNewTabPageClickInterceptor = true;
+
+                function requestedNewContext(event) {
+                    return event.button === 1 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+                }
+
+                function findAnchor(path) {
+                    return path.find(element => element && element.tagName === 'A' && element.href);
+                }
+
+                function isHttpUrl(url) {
+                    try {
+                        const parsed = new URL(url, location.href);
+                        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+                    } catch {
+                        return false;
+                    }
+                }
+
+                document.addEventListener('click', event => {
+                    if (event.defaultPrevented || requestedNewContext(event)) return;
+                    const path = event.composedPath ? event.composedPath() : [event.target];
+                    const anchor = findAnchor(path);
+                    if (!anchor || !isHttpUrl(anchor.href)) return;
+
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                    location.href = anchor.href;
+                }, true);
+            }.toString()})();`;
+            mountPoint.appendChild(script);
+            script.remove();
+        } catch (error) {
+            console.warn('[No New Tab] Failed to inject page click interceptor:', error);
+        }
+    }
+
     function startInterceptor() {
         if (interceptorStarted) return;
         interceptorStarted = true;
@@ -919,6 +969,7 @@
         patchAttachShadow();
         observeRoot(document);
         attachBilibiliSearchButtonInterceptor();
+        injectPageRealmClickInterceptor();
 
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', observeExistingShadowRoots, { once: true });

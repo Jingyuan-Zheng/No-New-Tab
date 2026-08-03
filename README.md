@@ -24,10 +24,6 @@ The README of this project has documentation in both English and Chinese.
 * Handles both internal and external HTTP/HTTPS links on enabled websites without requiring the destination website to be added
 * Preserves deliberate middle-click and Command/Ctrl, Shift, or Alt click behavior for opening a new tab or window
 
-## ⚠️ Known Issue
-
-On Bilibili video pages, some profile links—including UP creator avatars/names and comment-user avatars—may still open in a new tab. The attempted fix was reverted while the issue is investigated.
-
 ## 🎬 Demo
 
 https://github.com/user-attachments/assets/1b11f4dd-e037-409a-9360-96c3b4c63fdd
@@ -62,6 +58,10 @@ The website list determines **where the userscript is active**. It never collect
 The userscript must match all HTTP/HTTPS pages so it can run on websites that users add later. On websites that are not enabled, it only registers the settings menu and exits immediately; it does not install click interception, DOM observers, or page prototype patches. Custom settings survive normal automatic updates. Export the configuration before uninstalling the script, changing userscript managers, or clearing extension data.
 
 # 📖 Changelog
+
+### v7.0.0 (2026-08-03)
+- Intercepts ordinary link clicks in the page context, including dynamically rendered Bilibili creator and comment profile links
+- Preserves deliberate middle-click and Command/Ctrl, Shift, or Alt click behavior for opening a new tab or window
 
 ### v6.0.1 (2026-07-15)
 - Rewrote the Chinese and English userscript descriptions with direct search terms and examples of supported websites
