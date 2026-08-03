@@ -59,10 +59,6 @@ The userscript must match all HTTP/HTTPS pages so it can run on websites that us
 
 # 📖 Changelog
 
-### v6.1.0 (2026-08-03)
-- Fixed an issue where clicking the UP avatar on Bilibili video pages would open a new tab by patching `HTMLAnchorElement.prototype.target` property assignment and proxying blank `window.open` calls
-- Improved target matching to handle non-standard target attributes like `blank`
-
 ### v6.0.1 (2026-07-15)
 - Rewrote the Chinese and English userscript descriptions with direct search terms and examples of supported websites
 

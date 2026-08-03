@@ -41,7 +41,7 @@ vm.runInNewContext(source.replace(bootstrapCall, testExport), context, { filenam
 const api = context.__noNewTabTestApi;
 
 test('Chinese and English translation tables contain the same keys', () => {
-    assert.match(source, /\/\/ @version\s+6\.1\.0\s*$/m);
+    assert.match(source, /\/\/ @version\s+6\.0\.1\s*$/m);
     assert.match(source, /@description\s+禁止 B站、知乎、微博、小红书等网站强制新标签页打开链接/);
     assert.match(source, /@description:en\s+Block Bilibili, Zhihu, Weibo, RedNote/);
     assert.match(source, /\/\/ @author\s+Jingyuan Zheng/);
@@ -243,9 +243,9 @@ test('an enabled website forces site-requested external links but preserves expl
     vm.runInNewContext(source, enabledContext, { filename: scriptUrl.pathname });
 
     assert.equal((listeners.get('keydown') || []).length, 1, 'document keydown listener should not be duplicated');
-    assert.ok(enabledContext.open('https://www.bilibili.com/video/BV1'));
+    assert.equal(enabledContext.open('https://www.bilibili.com/video/BV1'), null);
     assert.equal(location.href, 'https://www.bilibili.com/video/BV1');
-    assert.ok(enabledContext.open('https://example.com/'));
+    assert.equal(enabledContext.open('https://example.com/'), null);
     assert.equal(location.href, 'https://example.com/');
     assert.equal(originalOpenCalls.length, 0);
 
@@ -282,83 +282,9 @@ test('an enabled website forces site-requested external links but preserves expl
     await new Promise(resolve => setImmediate(resolve));
     assert.equal(menuNames.length, 2);
     assert.match(menuNames[0], /内置规则启用/);
-    assert.ok(enabledContext.open('https://sub.custom.example/article'));
+    assert.equal(enabledContext.open('https://sub.custom.example/article'), null);
     assert.equal(location.href, 'https://sub.custom.example/article');
     assert.equal(originalOpenCalls.length, 2);
-});
-
-test('intercepts Bilibili UP avatar clicks, anchor target properties, and blank window.open calls', async () => {
-    const listeners = new Map();
-    let currentLocation = 'https://www.bilibili.com/video/BV1xx411c7xx';
-
-    class MockAnchor {
-        constructor() {
-            this.tagName = 'A';
-            this.nodeType = 1;
-            this._target = '_self';
-            this.href = 'https://space.bilibili.com/3546975127472355/?spm_id_from=333.788.upinfo.head.click';
-        }
-        getAttribute(name) { return name === 'target' ? this._target : null; }
-        setAttribute(name, val) { if (name === 'target') this._target = val; }
-        removeAttribute(name) { if (name === 'target') this._target = null; }
-    }
-
-    Object.defineProperty(MockAnchor.prototype, 'target', {
-        get() { return this._target; },
-        set(val) { this._target = val; },
-        configurable: true
-    });
-
-    const mockLocation = {
-        hostname: 'www.bilibili.com',
-        get href() { return currentLocation; },
-        set href(val) { currentLocation = val; }
-    };
-
-    const mockDoc = {
-        documentElement: new MockAnchor(),
-        readyState: 'complete',
-        addEventListener(type, cb) {
-            const arr = listeners.get(type) || [];
-            arr.push(cb);
-            listeners.set(type, arr);
-        }
-    };
-
-    const bContext = {
-        URL,
-        WeakSet,
-        Proxy,
-        Element: MockAnchor,
-        HTMLAnchorElement: MockAnchor,
-        MutationObserver: class { observe() {} },
-        navigator: { language: 'zh-CN', languages: ['zh-CN'] },
-        document: mockDoc,
-        location: mockLocation,
-        GM_getValue: () => null,
-        GM_setValue: () => undefined,
-        GM_registerMenuCommand: () => {},
-        console,
-        open: () => 'original'
-    };
-    bContext.window = bContext;
-
-    vm.runInNewContext(source, bContext, { filename: scriptUrl.pathname });
-
-    // 1. Property assignment anchor.target = '_blank'
-    const avatarAnchor = new MockAnchor();
-    avatarAnchor.target = '_blank';
-    assert.equal(avatarAnchor.target, '_self');
-
-    // 2. Blank window.open ('', '_blank') followed by location assignment
-    const winProxy = bContext.open('', '_blank');
-    assert.ok(winProxy && typeof winProxy === 'object');
-    winProxy.location.href = 'https://space.bilibili.com/3546975127472355/';
-    assert.equal(currentLocation, 'https://space.bilibili.com/3546975127472355/');
-
-    // 3. Direct window.open(url, '_blank') call
-    bContext.open('https://space.bilibili.com/123456/', '_blank');
-    assert.equal(currentLocation, 'https://space.bilibili.com/123456/');
 });
 
 test('an English browser receives English menus and validation messages', async () => {
